@@ -1,0 +1,9 @@
+target
+.metadata
+.project
+.classpath
+*.~
+*~
+*.orig
+test-output
+*.log
