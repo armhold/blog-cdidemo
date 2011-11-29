@@ -1,5 +1,6 @@
 package net.ftlines.blog.cdidemo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -12,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Employee {
+public class Employee implements Serializable {
 
 	@GeneratedValue
 	@Id

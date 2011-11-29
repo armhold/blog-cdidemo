@@ -1,8 +1,9 @@
 package net.ftlines.blog.cdidemo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class EmployeeCriteria {
+public class EmployeeCriteria implements Serializable {
 	private Date hireDateMin;
 	private Date hireDateMax;
 	private Team team;

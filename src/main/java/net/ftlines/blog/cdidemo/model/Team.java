@@ -1,5 +1,6 @@
 package net.ftlines.blog.cdidemo.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Team {
+public class Team implements Serializable {
 
 	@GeneratedValue
 	@Id

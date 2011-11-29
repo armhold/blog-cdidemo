@@ -11,16 +11,16 @@ import org.apache.wicket.model.IModel;
 
 public class HomePage extends WebPage {
 
-	@Inject
-	Conversation conversation;
+    @Inject
+    Conversation conversation;
 
-	public HomePage() {
-		
-		conversation.begin();
-		
-		IModel<EmployeeCriteria> criteria = new ConversationModel<EmployeeCriteria>(new EmployeeCriteria());
+    public HomePage() {
 
-		add(new EmployeeCriteriaPanel("criteria", criteria));
-		add(new EmployeeListPanel("list", criteria));
-	}
+        conversation.begin();
+
+        IModel<EmployeeCriteria> criteria = new ConversationModel<EmployeeCriteria>(new EmployeeCriteria());
+
+        add(new EmployeeCriteriaPanel("criteria", criteria));
+        add(new EmployeeListPanel("list", criteria));
+    }
 }
