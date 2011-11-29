@@ -9,11 +9,11 @@ import javax.persistence.EntityManager;
 @ApplicationScoped
 public class TeamRepository {
 
-	@Inject
-	private EntityManager em;
+    @Inject
+    private EntityManager em;
 
-	public List<Team> list() {
-		return em.createQuery("FROM Team ORDER BY name").getResultList();
-	}
+    public List<Team> list() {
+        return em.createQuery("FROM Team ORDER BY name").getResultList();
+    }
 
 }

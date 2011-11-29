@@ -19,38 +19,38 @@ import org.apache.wicket.model.PropertyModel;
 
 public class EmployeeListPanel extends GenericPanel<EmployeeCriteria> {
 
-	public EmployeeListPanel(String id, IModel<EmployeeCriteria> model) {
-		super(id, model);
+    public EmployeeListPanel(String id, IModel<EmployeeCriteria> model) {
+        super(id, model);
 
-		DataView<?> employees = new DataView<Employee>("employees", new EmployeeProvider()) {
-			@Override
-			protected void populateItem(Item<Employee> item) {
-				IModel<Employee> user = item.getModel();
-				item.add(new Label("first", new PropertyModel(user, "firstName")));
-				item.add(new Label("last", new PropertyModel(user, "lastName")));
-				item.add(new Label("email", new PropertyModel(user, "email")));
-				item.add(new Label("hireDate", new PropertyModel(user, "hireDate")));
-				item.add(new Label("team", new PropertyModel(user, "team.name")));
-			}
-		};
-		employees.setItemsPerPage(10);
-		add(employees);
-		add(new PagingNavigator("navigator", employees));
-	}
+        DataView<?> employees = new DataView<Employee>("employees", new EmployeeProvider()) {
+            @Override
+            protected void populateItem(Item<Employee> item) {
+                IModel<Employee> user = item.getModel();
+                item.add(new Label("first", new PropertyModel(user, "firstName")));
+                item.add(new Label("last", new PropertyModel(user, "lastName")));
+                item.add(new Label("email", new PropertyModel(user, "email")));
+                item.add(new Label("hireDate", new PropertyModel(user, "hireDate")));
+                item.add(new Label("team", new PropertyModel(user, "team.name")));
+            }
+        };
+        employees.setItemsPerPage(10);
+        add(employees);
+        add(new PagingNavigator("navigator", employees));
+    }
 
-	private class EmployeeProvider extends EntityProvider<Employee> {
+    private class EmployeeProvider extends EntityProvider<Employee> {
 
-		@Inject
-		EmployeeRepository employees;
+        @Inject
+        EmployeeRepository employees;
 
-		public Iterator<Employee> iterator(int first, int count) {
-			return employees.list(getModelObject(), first, count).iterator();
-		}
+        public Iterator<Employee> iterator(int first, int count) {
+            return employees.list(getModelObject(), first, count).iterator();
+        }
 
-		public int size() {
-			return employees.count(getModelObject());
-		}
+        public int size() {
+            return employees.count(getModelObject());
+        }
 
-	}
+    }
 
 }

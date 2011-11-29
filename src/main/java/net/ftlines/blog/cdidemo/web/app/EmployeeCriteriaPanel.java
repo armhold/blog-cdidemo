@@ -17,26 +17,26 @@ import org.apache.wicket.model.PropertyModel;
 
 public class EmployeeCriteriaPanel extends GenericPanel<EmployeeCriteria> {
 
-	@Inject
-	private TeamRepository teams;
+    @Inject
+    private TeamRepository teams;
 
-	public EmployeeCriteriaPanel(String id, IModel<EmployeeCriteria> model) {
-		super(id, model);
+    public EmployeeCriteriaPanel(String id, IModel<EmployeeCriteria> model) {
+        super(id, model);
 
-		Form<?> form = new Form<Void>("form");
-		add(form);
+        Form<?> form = new Form<Void>("form");
+        add(form);
 
-		form.add(DateTextField.forDatePattern("hireDateMin", new PropertyModel(model, "hireDateMin"), "MM/dd/yyyy").add(
-				new DatePicker()));
-		form.add(DateTextField.forDatePattern("hireDateMax", new PropertyModel(model, "hireDateMax"), "MM/dd/yyyy").add(
-				new DatePicker()));
-		form.add(new DropDownChoice("team", new PropertyModel(model, "team"), new LoadableDetachableModel() {
-			@Override
-			protected Object load() {
-				return teams.list();
-			}
-		}, new ChoiceRenderer("name", "id")).setNullValid(true));
+        form.add(DateTextField.forDatePattern("hireDateMin", new PropertyModel(model, "hireDateMin"), "MM/dd/yyyy")
+                .add(new DatePicker()));
+        form.add(DateTextField.forDatePattern("hireDateMax", new PropertyModel(model, "hireDateMax"), "MM/dd/yyyy")
+                .add(new DatePicker()));
+        form.add(new DropDownChoice("team", new PropertyModel(model, "team"), new LoadableDetachableModel() {
+            @Override
+            protected Object load() {
+                return teams.list();
+            }
+        }, new ChoiceRenderer("name", "id")).setNullValid(true));
 
-	}
+    }
 
 }

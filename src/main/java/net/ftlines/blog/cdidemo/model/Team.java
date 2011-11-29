@@ -14,28 +14,28 @@ import javax.persistence.OneToMany;
 @Entity
 public class Team implements Serializable {
 
-	@GeneratedValue
-	@Id
-	private Long id;
-	@Basic(optional = false)
-	private String name;
-	@OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
-	private List<Employee> members = new ArrayList<Employee>();
+    @GeneratedValue
+    @Id
+    private Long id;
+    @Basic(optional = false)
+    private String name;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
+    private List<Employee> members = new ArrayList<Employee>();
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public List<Employee> getMembers() {
-		return members;
-	}
+    public List<Employee> getMembers() {
+        return members;
+    }
 
 }
