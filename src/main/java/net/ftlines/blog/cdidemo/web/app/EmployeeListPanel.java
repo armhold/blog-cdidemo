@@ -1,36 +1,26 @@
-package net.ftlines.blog.cdidemo;
+package net.ftlines.blog.cdidemo.web.app;
 
 import java.util.Iterator;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import net.ftlines.blog.cdidemo.model.Employee;
+import net.ftlines.blog.cdidemo.model.EmployeeCriteria;
+import net.ftlines.blog.cdidemo.model.EmployeeRepository;
 import net.ftlines.blog.cdidemo.web.EntityProvider;
-import net.ftlines.wicket.cdi.CdiContainer;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 
-public class HomePage extends WebPage {
+public class EmployeeListPanel extends GenericPanel<EmployeeCriteria> {
 
-	@Inject
-	EntityManager em;
-
-	public HomePage() {
-
-		add(new Label("count", new LoadableDetachableModel<Long>() {
-			@Override
-			protected Long load() {
-				return (Long) em.createQuery("SELECT COUNT(*) FROM Employee").getSingleResult();
-			}
-		}));
+	public EmployeeListPanel(String id, IModel<EmployeeCriteria> model) {
+		super(id, model);
 
 		DataView<?> employees = new DataView<Employee>("employees", new EmployeeProvider()) {
 			@Override
@@ -39,27 +29,28 @@ public class HomePage extends WebPage {
 				item.add(new Label("first", new PropertyModel(user, "firstName")));
 				item.add(new Label("last", new PropertyModel(user, "lastName")));
 				item.add(new Label("email", new PropertyModel(user, "email")));
+				item.add(new Label("hireDate", new PropertyModel(user, "hireDate")));
+				item.add(new Label("team", new PropertyModel(user, "team.name")));
 			}
 		};
 		employees.setItemsPerPage(10);
 		add(employees);
 		add(new PagingNavigator("navigator", employees));
-
 	}
 
-	private static class EmployeeProvider extends EntityProvider<Employee> {
+	private class EmployeeProvider extends EntityProvider<Employee> {
 
 		@Inject
-		EntityManager em;
+		EmployeeRepository employees;
 
 		public Iterator<Employee> iterator(int first, int count) {
-			return em.createQuery("FROM Employee").setFirstResult(first).setMaxResults(count).getResultList()
-					.iterator();
+			return employees.list(getModelObject(), first, count).iterator();
 		}
 
 		public int size() {
-			return ((Number) em.createQuery("SELECT COUNT(*) FROM Employee").getSingleResult()).intValue();
+			return employees.count(getModelObject());
 		}
 
 	}
+
 }

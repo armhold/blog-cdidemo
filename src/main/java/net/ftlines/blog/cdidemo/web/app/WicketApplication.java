@@ -1,4 +1,4 @@
-package net.ftlines.blog.cdidemo;
+package net.ftlines.blog.cdidemo.web.app;
 
 import javax.enterprise.inject.spi.BeanManager;
 
@@ -10,7 +10,7 @@ import org.jboss.weld.environment.servlet.Listener;
 /**
  * Application object for your web application. If you want to run this application without deploying, run the Start class.
  * 
- * @see net.ftlines.blog.cdidemo.Start#main(String[])
+ * @see net.ftlines.blog.cdidemo.web.app.web.app.Start#main(String[])
  */
 public class WicketApplication extends WebApplication
 {    	

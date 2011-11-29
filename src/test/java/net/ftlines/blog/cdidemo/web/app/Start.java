@@ -1,4 +1,4 @@
-package net.ftlines.blog.cdidemo;
+package net.ftlines.blog.cdidemo.web.app;
 
 import org.apache.wicket.util.time.Duration;
 import org.eclipse.jetty.http.ssl.SslContextFactory;
