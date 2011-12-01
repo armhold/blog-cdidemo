@@ -33,6 +33,7 @@ public class WicketApplication extends WebApplication {
 
     new CdiConfiguration(manager).configure(this);
 
+    mountPage("/employees", EmployeesListPage.class);
     mountPage("/teams", TeamsListPage.class);
     mountPage("/team/edit/${id}", TeamEditPage.class);
   }

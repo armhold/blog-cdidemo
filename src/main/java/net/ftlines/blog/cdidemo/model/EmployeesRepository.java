@@ -35,27 +35,27 @@ public class EmployeesRepository {
   }
 
   public List<Employee> list(EmployeeCriteria criteria, int first, int max) {
-    return query("FROM Employee", criteria, "ORDER BY lastName, firstName").setFirstResult(first).setMaxResults(max)
+    return query("FROM Employee e", criteria, "ORDER BY lastName, firstName").setFirstResult(first).setMaxResults(max)
         .getResultList();
   }
 
   public int count(EmployeeCriteria criteria) {
-    return ((Long) query("SELECT COUNT(*) FROM Employee", criteria, "").getSingleResult()).intValue();
+    return ((Long) query("SELECT COUNT(*) FROM Employee e", criteria, "").getSingleResult()).intValue();
   }
 
   private Query query(String base, EmployeeCriteria criteria, String suffix) {
     List<Object> params = new ArrayList<Object>();
     String hql = base + " WHERE 1=1";
     if (criteria.getHireDateMin() != null) {
-      hql += "AND hireDate>=?";
+      hql += " AND e.hireDate>=?";
       params.add(criteria.getHireDateMin());
     }
     if (criteria.getHireDateMax() != null) {
-      hql += "AND hireDate<=?";
+      hql += " AND e.hireDate<=?";
       params.add(criteria.getHireDateMax());
     }
     if (criteria.getTeam() != null) {
-      hql += "AND team=?";
+      hql += " AND EXISTS (FROM Team t JOIN t.members AS m WHERE m.employee=e AND t=?)";
       params.add(criteria.getTeam());
     }
 
