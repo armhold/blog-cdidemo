@@ -3,7 +3,7 @@ package net.ftlines.blog.cdidemo.web.app;
 import javax.inject.Inject;
 
 import net.ftlines.blog.cdidemo.model.EmployeeCriteria;
-import net.ftlines.blog.cdidemo.model.TeamRepository;
+import net.ftlines.blog.cdidemo.model.TeamsRepository;
 
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
@@ -17,26 +17,26 @@ import org.apache.wicket.model.PropertyModel;
 
 public class EmployeeCriteriaPanel extends GenericPanel<EmployeeCriteria> {
 
-    @Inject
-    private TeamRepository teams;
+  @Inject
+  private TeamsRepository teams;
 
-    public EmployeeCriteriaPanel(String id, IModel<EmployeeCriteria> model) {
-        super(id, model);
+  public EmployeeCriteriaPanel(String id, IModel<EmployeeCriteria> model) {
+    super(id, model);
 
-        Form<?> form = new Form<Void>("form");
-        add(form);
+    Form<?> form = new Form<Void>("form");
+    add(form);
 
-        form.add(DateTextField.forDatePattern("hireDateMin", new PropertyModel(model, "hireDateMin"), "MM/dd/yyyy")
-                .add(new DatePicker()));
-        form.add(DateTextField.forDatePattern("hireDateMax", new PropertyModel(model, "hireDateMax"), "MM/dd/yyyy")
-                .add(new DatePicker()));
-        form.add(new DropDownChoice("team", new PropertyModel(model, "team"), new LoadableDetachableModel() {
-            @Override
-            protected Object load() {
-                return teams.list();
-            }
-        }, new ChoiceRenderer("name", "id")).setNullValid(true));
+    form.add(DateTextField.forDatePattern("hireDateMin", new PropertyModel(model, "hireDateMin"), "MM/dd/yyyy").add(
+        new DatePicker()));
+    form.add(DateTextField.forDatePattern("hireDateMax", new PropertyModel(model, "hireDateMax"), "MM/dd/yyyy").add(
+        new DatePicker()));
+    form.add(new DropDownChoice("team", new PropertyModel(model, "team"), new LoadableDetachableModel() {
+      @Override
+      protected Object load() {
+        return teams.list(0, Integer.MAX_VALUE);
+      }
+    }, new ChoiceRenderer("name", "id")).setNullValid(true));
 
-    }
+  }
 
 }

@@ -14,23 +14,26 @@ import org.jboss.weld.environment.servlet.Listener;
  * @see net.ftlines.blog.cdidemo.web.app.web.app.Start#main(String[])
  */
 public class WicketApplication extends WebApplication {
-    /**
-     * @see org.apache.wicket.Application#getHomePage()
-     */
-    @Override
-    public Class<HomePage> getHomePage() {
-        return HomePage.class;
-    }
+  /**
+   * @see org.apache.wicket.Application#getHomePage()
+   */
+  @Override
+  public Class<HomePage> getHomePage() {
+    return HomePage.class;
+  }
 
-    /**
-     * @see org.apache.wicket.Application#init()
-     */
-    @Override
-    public void init() {
-        super.init();
+  /**
+   * @see org.apache.wicket.Application#init()
+   */
+  @Override
+  public void init() {
+    super.init();
 
-        BeanManager manager = (BeanManager) getServletContext().getAttribute(Listener.BEAN_MANAGER_ATTRIBUTE_NAME);
+    BeanManager manager = (BeanManager) getServletContext().getAttribute(Listener.BEAN_MANAGER_ATTRIBUTE_NAME);
 
-        new CdiConfiguration(manager).configure(this);
-    }
+    new CdiConfiguration(manager).configure(this);
+
+    mountPage("/teams", TeamsListPage.class);
+    mountPage("/team/edit/${id}", TeamEditPage.class);
+  }
 }

@@ -10,19 +10,19 @@ import javax.persistence.Persistence;
 
 public class EntityMangerFactoryProducer {
 
-    @Inject
-    Event<EntityManagerFactoryCreatedEvent> created;
+  @Inject
+  Event<EntityManagerFactoryCreatedEvent> created;
 
-    @Produces
-    @ApplicationScoped
-    public EntityManagerFactory create() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("cdidemo");
-        created.fire(new EntityManagerFactoryCreatedEvent(emf));
-        return emf;
-    }
+  @Produces
+  @ApplicationScoped
+  public EntityManagerFactory create() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("cdidemo");
+    created.fire(new EntityManagerFactoryCreatedEvent(emf));
+    return emf;
+  }
 
-    public void destroy(@Disposes EntityManagerFactory factory) {
-        factory.close();
-    }
+  public void destroy(@Disposes EntityManagerFactory factory) {
+    factory.close();
+  }
 
 }

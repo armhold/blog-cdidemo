@@ -8,17 +8,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 public class EntityManagerProducer {
-    @Inject
-    EntityManagerFactory emf;
+  @Inject
+  EntityManagerFactory emf;
 
-    @Produces
-    @ConversationScoped
-    public EntityManager create() {
-        return emf.createEntityManager();
-    }
+  @Produces
+  @ConversationScoped
+  public EntityManager create() {
+    return emf.createEntityManager();
+  }
 
-    public void destroy(@Disposes EntityManager em) {
-        em.close();
-    }
+  public void destroy(@Disposes EntityManager em) {
+    em.close();
+  }
 
 }

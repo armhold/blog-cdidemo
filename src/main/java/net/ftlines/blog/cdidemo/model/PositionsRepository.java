@@ -7,13 +7,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 @ApplicationScoped
-public class TeamRepository {
+public class PositionsRepository {
 
-    @Inject
-    private EntityManager em;
+  @Inject
+  EntityManager em;
 
-    public List<Team> list() {
-        return em.createQuery("FROM Team ORDER BY name").getResultList();
-    }
-
+  public List<Position> list() {
+    return em.createQuery("FROM Position ORDER BY name").getResultList();
+  }
 }

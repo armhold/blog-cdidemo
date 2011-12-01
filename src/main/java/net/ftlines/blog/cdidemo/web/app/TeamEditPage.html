@@ -1,0 +1,37 @@
+<wicket:extend xmlns:wicket>
+<h3>Create/Edit Team</h3><br/>
+
+	<form wicket:id="form">
+	
+		<label wicket:for="name"><wicket:label>Team Name</wicket:label>:</label>
+		<input wicket:id="name" type="text"/>
+	
+		<table class="styled">
+			<tbody>
+				<tr>
+					<th>Employee</th>
+					<th>Position</th>
+					<th>Effective Date</th>
+					<th>&nbsp;</th>
+				</tr>
+				<tr wicket:id="members">
+					<td><span wicket:id="employee" type="text"></span></td>
+					<td><span wicket:id="position"></span></td>
+					<td><span wicket:id="effectiveDate" type="text"></span></td>
+					<td>
+						<a wicket:id="edit">Edit</a> | 
+						<a wicket:id="up">Up</a> | 
+						<a wicket:id="down">Down</a>
+						</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<input wicket:id="save" type="submit" value="Save"/>
+		<a wicket:id="cancel">Cancel</a>
+		
+		<div wicket:id="modal"></div>
+		
+	</form>
+
+</wicket:extend>

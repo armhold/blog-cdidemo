@@ -7,12 +7,12 @@ import org.apache.wicket.model.IModel;
 
 public abstract class EntityProvider<T> extends SortableDataProvider<T> {
 
-    public EntityProvider() {
-        CdiContainer.get().getNonContextualManager().inject(this);
-    }
+  public EntityProvider() {
+    CdiContainer.get().getNonContextualManager().inject(this);
+  }
 
-    public IModel<T> model(T entity) {
-        return new EntityModel<T>(entity);
-    }
+  public IModel<T> model(T entity) {
+    return new EntityModel<T>(entity);
+  }
 
 }
