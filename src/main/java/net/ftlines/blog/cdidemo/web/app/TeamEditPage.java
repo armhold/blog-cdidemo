@@ -25,26 +25,22 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 public class TeamEditPage extends BasePage {
 
   @Inject
-  PositionsRepository positions;
-
-  private final IModel<Team> team;
-  private final ModalWindow modal;
-
-  @Inject
   UserAction action;
 
   public TeamEditPage(PageParameters params) {
     action.begin();
 
-    Long teamId = params.get("id").toOptionalLong();
-    team = new EntityModel<Team>(Team.class, teamId);
-
-    Team t = team.getObject();
+    Long teamId = params.get("id").toLong();
+    IModel<Team> team = new EntityModel<Team>(Team.class, teamId);
+    setDefaultModel(team);
 
     Form form = new Form("form");
     add(form);
 
     form.add(new TextField("name", new PropertyModel(team, "name")));
+
+    final ModalWindow modal = new ModalWindow("modal");
+    form.add(modal);
 
     form.add(new ListView<Member>("members", new PropertyModel(team, "members")) {
 
@@ -74,23 +70,21 @@ public class TeamEditPage extends BasePage {
           }
         });
         item.add(moveUpLink("up", item));
-        item.add(moveUpLink("down", item));
+        item.add(moveDownLink("down", item));
       }
     }.setReuseItems(true));
-
-    form.add(modal = new ModalWindow("modal").setInitialWidth(340).setInitialHeight(150));
 
     form.add(new Button("save") {
       @Override
       public void onSubmit() {
-        action.apply().end();
+        action.apply();
         setResponsePage(TeamsListPage.class);
       }
     });
     form.add(new Link("cancel") {
       @Override
       public void onClick() {
-        action.undo().end();
+        action.undo();
         setResponsePage(TeamsListPage.class);
       }
     });

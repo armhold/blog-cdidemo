@@ -46,11 +46,4 @@ public class UserAction implements Serializable {
     em.clear();
     return this;
   }
-
-  public UserAction end() {
-    if (!conversation.isTransient()) {
-      conversation.end();
-    }
-    return this;
-  }
 }
