@@ -19,5 +19,5 @@ Articles:
  1. [Integrating CDI Into Wicket](https://www.42lines.net/2011/11/15/integrating-cdi-into-wicket/)
  2. [Adding JPA/Hibernate into CDI and Wicket Mix](https://www.42lines.net/2011/11/21/adding-jpahibernate-into-the-cdi-and-wicket-mix/)
  3. [Leveraging Conversations to Reduce Plumbing](https://www.42lines.net/2011/11/29/leveraging-conversations/)
-
+ 4. [Simplifying Non-Trivial User Workflows with Conversations](https://www.42lines.net/2011/12/01/simplifying-non-trivial-user-workflows-with-conversations/)
 
