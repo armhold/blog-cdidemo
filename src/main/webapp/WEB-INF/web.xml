@@ -8,6 +8,9 @@
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>net.ftlines.blog.cdidemo.cdi.ApplicationLifecycleNotifier</listener-class>
+	</listener>
 
 	<filter>
 		<filter-name>wicket.cdidemo</filter-name>
