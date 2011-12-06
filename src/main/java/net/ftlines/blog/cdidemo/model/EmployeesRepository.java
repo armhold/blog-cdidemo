@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import net.ftlines.blog.cdidemo.cdi.Transactional;
+
 @ApplicationScoped
 public class EmployeesRepository {
 
