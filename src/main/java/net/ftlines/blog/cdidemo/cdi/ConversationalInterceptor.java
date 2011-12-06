@@ -3,43 +3,49 @@ package net.ftlines.blog.cdidemo.cdi;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-import org.jboss.weld.Container;
+import org.jboss.weld.context.ConversationContext;
+import org.jboss.weld.context.bound.Bound;
 import org.jboss.weld.context.bound.BoundConversationContext;
 import org.jboss.weld.context.bound.BoundRequest;
 import org.jboss.weld.context.bound.MutableBoundRequest;
+import org.jboss.weld.context.http.Http;
 
 @Conversational
 @Interceptor
 public class ConversationalInterceptor {
+
+  @Inject
+  @Http
+  ConversationContext context;
   
-  
+  @Inject
+  @Bound
+  BoundConversationContext boundContext;
+
   @AroundInvoke
   public Object wrapInConversation(InvocationContext invocation) throws Exception {
-    BoundConversationContext context = Container.instance().deploymentManager().instance()
-        .select(BoundConversationContext.class).get();
-    
+
     BoundRequest storage = null;
 
-    if (!context.isActive()) {
-      System.out.println("=== ACTIVATING CONVERSATION");
+    if (!context.isActive()&&!boundContext.isActive()) {
       Map<String, Object> session = new HashMap<String, Object>();
       Map<String, Object> request = new HashMap<String, Object>();
       storage = new MutableBoundRequest(request, session);
-      context.associate(storage);
-      context.activate();
+      boundContext.associate(storage);
+      boundContext.activate();
     }
 
     try {
       return invocation.proceed();
     } finally {
       if (storage != null) {
-        System.out.println("=== DEACTIVATING CONVERSATION");
-        context.deactivate();
-        context.dissociate(storage);
+        boundContext.deactivate();
+        boundContext.dissociate(storage);
       }
     }
   }
