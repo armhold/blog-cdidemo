@@ -15,5 +15,3 @@ Features:
  * Various integration classes for Wicket, such as base Entity models and data providers
 
 The articles about this project are available on [here](https://www.42lines.net/category/blog/software-engineering/full-stack-implementation/)
-
-
