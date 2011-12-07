@@ -8,7 +8,6 @@ import net.ftlines.blog.cdidemo.cdi.Transactional;
 import net.ftlines.blog.cdidemo.model.EmployeeCriteria;
 import net.ftlines.blog.cdidemo.model.EmployeesRepository;
 
-@ApplicationScoped
 public class EmployeesReportGenerator {
   @Inject
   EmployeesRepository employees;
