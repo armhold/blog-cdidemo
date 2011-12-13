@@ -44,6 +44,17 @@ public class ModelInitializer {
 
     em.getTransaction().begin();
 
+    // prove that we can persist sports outside of wicket
+    Sport sport = new Sport();
+    sport.setName("baseball");
+    System.out.println("saveSport: " + sport);
+    em.persist(sport);
+
+    sport = new Sport();
+    sport.setName("hockey");
+    System.out.println("saveSport: " + sport);
+    em.persist(sport);
+
     Position positions[] = new Position[positionNames.length];
     for (int i = 0; i < positions.length; i++) {
       Position p = new Position();

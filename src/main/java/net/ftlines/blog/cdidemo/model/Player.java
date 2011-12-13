@@ -13,7 +13,7 @@ public class Player
     private Long id;
 
     @ManyToOne
-    private Sport home;
+    private Sport sport;
 
     private String name;
 
@@ -22,9 +22,9 @@ public class Player
         return id;
     }
 
-    public Sport getHome()
+    public Sport getSport()
     {
-        return home;
+        return sport;
     }
 
     public String getName()

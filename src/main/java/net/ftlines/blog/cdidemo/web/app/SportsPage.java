@@ -34,7 +34,9 @@ public class SportsPage extends BasePage
             protected void onSubmit()
             {
                 // persist and commit the Sport
-                sportsRepository.saveSport(model.getObject());
+                Sport sport = model.getObject();
+
+                sportsRepository.saveSport(sport);
                 action.apply();
             }
         };

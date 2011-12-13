@@ -13,6 +13,8 @@ public class SportsRepository
 
     public void saveSport(Sport sport)
     {
+        System.out.println("saveSport: " + sport);
+
         em.persist(sport);
     }
 

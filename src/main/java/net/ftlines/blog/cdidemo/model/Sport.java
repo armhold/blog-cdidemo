@@ -15,8 +15,8 @@ public class Sport implements Serializable
     @Basic(optional = false)
     private String name;
 
-    @OneToMany(mappedBy="home", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<Player> rooms = new ArrayList<Player>();
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Player> players = new ArrayList<Player>();
 
     public Sport()
     {
@@ -38,8 +38,17 @@ public class Sport implements Serializable
         return id;
     }
 
-    public List<Player> getRooms()
+    public List<Player> getPlayers()
     {
-        return rooms;
+        return players;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Sport{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
