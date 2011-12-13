@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class SportsPage extends BasePage
 {
     @Inject
-    UserAction userAction;
+    UserAction action;
 
     @Inject
     SportsRepository sportsRepository;
@@ -23,8 +23,9 @@ public class SportsPage extends BasePage
     public SportsPage()
     {
 
-        userAction.begin();
+        action.begin();
 
+        // create new, unsaved Sport entity
         final IModel<Sport> model = new ConversationModel<Sport>(new Sport());
         
         Form form = new Form("form")
@@ -32,8 +33,9 @@ public class SportsPage extends BasePage
             @Override
             protected void onSubmit()
             {
+                // persist and commit the Sport
                 sportsRepository.saveSport(model.getObject());
-                userAction.apply();
+                action.apply();
             }
         };
         
@@ -46,7 +48,7 @@ public class SportsPage extends BasePage
             @Override
             public void onSubmit()
             {
-                userAction.undo();
+                action.undo();
                 setResponsePage(HomePage.class);
             }
         }.setDefaultFormProcessing(false);
