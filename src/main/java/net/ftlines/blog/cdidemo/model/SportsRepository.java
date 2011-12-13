@@ -5,15 +5,15 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 @ApplicationScoped
-public class HomesRepository
+public class SportsRepository
 {
 
     @Inject
     private EntityManager em;
 
-    public void saveHome(Sport home)
+    public void saveSport(Sport sport)
     {
-        em.persist(home);
+        em.persist(sport);
     }
 
 }

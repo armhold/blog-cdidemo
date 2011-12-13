@@ -1,7 +1,7 @@
 package net.ftlines.blog.cdidemo.web.app;
 
 import net.ftlines.blog.cdidemo.model.Sport;
-import net.ftlines.blog.cdidemo.model.HomesRepository;
+import net.ftlines.blog.cdidemo.model.SportsRepository;
 import net.ftlines.blog.cdidemo.web.ConversationModel;
 import net.ftlines.blog.cdidemo.web.UserAction;
 import org.apache.wicket.markup.html.form.Button;
@@ -18,7 +18,7 @@ public class SportsPage extends BasePage
     UserAction userAction;
 
     @Inject
-    HomesRepository homesRepository;
+    SportsRepository sportsRepository;
     
     public SportsPage()
     {
@@ -32,7 +32,7 @@ public class SportsPage extends BasePage
             @Override
             protected void onSubmit()
             {
-                homesRepository.saveHome(model.getObject());
+                sportsRepository.saveSport(model.getObject());
                 userAction.apply();
             }
         };
